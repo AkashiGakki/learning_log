@@ -1,0 +1,92 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Topics</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        body {
+            font-family: "plantc", "Source Han Serif", serif;
+            font-weight: bolder;
+            text-decoration: none;
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar"
+            ></button>
+            <a href="/note/index" class="navbar-brand">Learning Log</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/note/topics">Topics</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li><a href="#">Hello, {{ user.username }}</a></li>
+                    <li><a href="/users/logout">log out</a></li>
+                {% else %}
+                    <li><a href="/users/register">register</a></li>
+                    <li><a href="/users/login">log in</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="page-header">
+        <h1>Topics</h1>
+    </div>
+</div>
+<div class="container">
+    <ul>
+        {% for topic in topics %}
+            <li>
+                <h3><a href="/note/topics/{{ topic.id }}">{{ topic }}</a></h3>
+            </li>
+        {% empty %}
+            <li>No topics have been added yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h3><a href="/note/new_topic">Add new topic</a></h3>
+</div>
+<footer class="footer">
+    <h4>Copyright &copy; 2019 Akashi_Sai. All Rights Reserved.</h4>
+</footer>
+
+{#    <div>#}
+{#        <a href="/note/index">Learning Log</a> -#}
+{#        <a href="/note/topics">Topics</a>#}
+{#    </div>#}
+{#    <div>#}
+{#        <p>Topics</p>#}
+{#        <ul>#}
+{#            {% for topic in topics %}#}
+{#                <li><a href="/note/topics/{{ topic.id }}">{{ topic }}</a></li>#}
+{#            {% empty %}#}
+{#                <li>No topics have been added yet.</li>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{#    </div>#}
+{#    <div>#}
+{#        <a href="/note/new_topic">Add a new topic</a>#}
+{#    </div>#}
+</body>
+</html>

@@ -1,0 +1,86 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        body {
+            font-family: "plantc", "Source Han Serif", serif;
+            font-weight: bolder;
+            text-decoration: none;
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar"
+            ></button>
+            <a href="/note/index" class="navbar-brand">Learning Log</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/note/topics">Topics</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li><a href="#">Hello, {{ user.username }}</a></li>
+                    <li><a href="/users/logout">log out</a></li>
+                {% else %}
+                    <li><a href="/users/register">register</a></li>
+                    <li><a href="/users/login">log in</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="page-header">
+        <div class="jumbotron">
+            <h1>Track Your Learning.</h1>
+            <p>Learning Log helps you keep track of your learning, for any topic you're learning about.</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h3>
+        <a href="/users/register">Register an account</a>
+        to make your own Learning Log, and list the topics you're learning about.
+    </h3>
+    <h3>Whenever you learn something new about a topic, make an entry summarizing what you're learned.</h3>
+</div>
+<footer class="footer">
+    <h4>Copyright &copy; 2019 Akashi_Sai. All Rights Reserved.</h4>
+</footer>
+
+{#    <div>#}
+{#        <a href="/note/index">Learning Log</a> -#}
+{#            <a href="{% url 'note:index' %}">Learning Log</a> -#}
+{#        <a href="/note/topics">Topics</a> -#}
+{#            <a href="{% url 'note:topics' %}">Topics</a> -#}
+{#        {% if user.is_authenticated %}#}
+{#            Hello, {{ user.username }}.#}
+{#            <a href="/users/logout">logout</a>#}
+{#        {% else %}#}
+{#            <a href="/users/register">register</a>#}
+{#            <a href="/users/login">login</a>#}
+{#        {% endif %}#}
+{#    </div>#}
+{#    <p>Learning Log helps you keep track of your learning, for any topic you're learning about.</p>#}
+</body>
+</html>

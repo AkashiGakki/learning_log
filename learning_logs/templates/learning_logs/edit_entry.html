@@ -1,0 +1,83 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit_Entry</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <style>
+        body {
+            font-family: "plantc", "Source Han Serif", serif;
+            font-weight: bolder;
+            text-decoration: none;
+        }
+        footer {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar"
+            ></button>
+            <a href="/note/index" class="navbar-brand">Learning Log</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/note/topics">Topics</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li><a href="#">Hello, {{ user.username }}</a></li>
+                    <li><a href="/users/logout">log out</a></li>
+                {% else %}
+                    <li><a href="/users/register">register</a></li>
+                    <li><a href="/users/login">log in</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="page-herder">
+        <h2>Edit entry:</h2>
+    </div>
+</div>
+<div class="container">
+    <form action="/note/edit_entry/{{ entry.id }}" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button name="submit" class="btn btn-primary">save changes</button>
+        {% endbuttons %}
+    </form>
+</div>
+<footer class="footer">
+    <h4>Copyright &copy; 2019 Akashi_Sai. All Rights Reserved.</h4>
+</footer>
+
+{#    <div>#}
+{#        <a href="/note/topics/{{ topic.id }}">Topic - {{ topic }}</a>#}
+{#    </div>#}
+{#    <div>#}
+{#        <p>Edit entry:</p>#}
+{#    </div>#}
+{#    <form action="/note/edit_entry/{{ entry.id }}" method="post">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button name="submit">save changes</button>#}
+{#    </form>#}
+</body>
+</html>
